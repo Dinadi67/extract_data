@@ -1,6 +1,5 @@
 import json
 import pickle
-import lightgbm as lgb
 import re
 import numpy as np
 import pandas as pd
@@ -243,9 +242,8 @@ def load_model(df_train, target):
     # Chargement du modèle de prédiction
     df_train = df_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
 
-    clf = lgb.LGBMClassifier(colsample_bytree=0.6, device='gpu',
-               learning_rate=0.03, max_depth=7, n_estimators=600,
-               reg_lambda=2.15, subsample=0.6)
+    with open('model_pkl', 'rb') as l:
+        clf = pickle.load(l)
     clf.fit(df_train, target['TARGET'])
 
     return clf
