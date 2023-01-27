@@ -12,7 +12,7 @@ from sklearn.preprocessing import MinMaxScaler
 # Creation de l'instance Flask.
 
 app = Flask(__name__)
-
+server = app.server
 # On charge les données
 data_train = pd.read_csv('train_extract.csv', low_memory=False)
 data_test = pd.read_csv('test_extract.csv', low_memory=False)
