@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LightGBM" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/LightGBM/external_libs/compute" vcs="Git" />
   </component>
 </project>

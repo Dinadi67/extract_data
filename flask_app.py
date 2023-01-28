@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from lime import lime_tabular
 from sklearn.impute import SimpleImputer
 from sklearn.neighbors import NearestNeighbors
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, LabelEncoder
 
 # Creation de l'instance Flask.
 
@@ -179,9 +179,18 @@ def load_localfeat():
 def features_engineering(data_train, data_test):
     # Cette fonction regroupe toutes les opérations de features engineering
     # mises en place sur les sets train & test
+    le = preprocessing.LabelEncoder()
 
-    data_train = pd.get_dummies(data_train)
-    data_test = pd.get_dummies(data_test)
+    variables_categ = data_train.select_dtypes(exclude=['int64', 'float64'])
+    variables_categ = variables_categ.apply(lambda col: le.fit_transform(col.astype(object)), axis=0,result_type='expand')
+    data_train.drop(variables_categ.columns, axis=1, inplace=True)
+
+    variables_test = data_test.select_dtypes(exclude=['int64', 'float64'])
+    variables_test = variables_test.apply(lambda col: le.fit_transform(col.astype(object)), axis=0,result_type='expand')
+    data_test.drop(variables_test.columns, axis=1, inplace=True)
+
+    data_train = pd.concat([variables_categ, data_train], axis=1)
+    data_test = pd.concat([variables_test, data_test], axis=1)
 
     train_labels = data_train['TARGET']
     # Align the training and testing data, keep only columns present in both dataframes
