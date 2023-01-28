@@ -179,7 +179,7 @@ def load_localfeat():
 def features_engineering(data_train, data_test):
     # Cette fonction regroupe toutes les opérations de features engineering
     # mises en place sur les sets train & test
-    le = preprocessing.LabelEncoder()
+    le =LabelEncoder()
 
     variables_categ = data_train.select_dtypes(exclude=['int64', 'float64'])
     variables_categ = variables_categ.apply(lambda col: le.fit_transform(col.astype(object)), axis=0,result_type='expand')
