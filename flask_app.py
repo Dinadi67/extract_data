@@ -107,7 +107,7 @@ def load_features():
 
     print(feature_imp)
 
-    data_feat = json.loads(feature_imp.to_json(orient='index'))
+    data_feat = json.loads(feature_imp.to_json(orient='values'))
 
     return data_feat
 
