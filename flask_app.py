@@ -133,7 +133,7 @@ def predict():
 
     prediction = prediction[0].tolist()
 
-    return jsonify(prediction)
+    return prediction.to_json(orient='values')
 
 
 # Chargement des infos gen sur les 10 proches voisins
