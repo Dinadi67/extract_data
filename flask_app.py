@@ -107,7 +107,7 @@ def load_features():
 
     print(feature_imp)
 
-    data_feat = json.loads(feature_imp.to_json(orient='values'))
+    data_feat = json.loads(feature_imp.to_json(orient='index'))
 
     return data_feat
 
@@ -133,7 +133,7 @@ def predict():
 
     prediction = prediction[0].tolist()
 
-    return prediction.to_json(orient='values')
+    return jsonify(prediction)
 
 
 # Chargement des infos gen sur les 10 proches voisins
