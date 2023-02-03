@@ -68,7 +68,7 @@ def init_model():
     exp = lime_model(df_train)
     print("exp done")
 
-    return jsonify(["Initialisation terminée."])
+    return ["Initialisation terminée."]
 
 
 # Chargement de l'ID client
