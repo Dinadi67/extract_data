@@ -1,5 +1,5 @@
 import json
-import pickle
+import skops.io as sio
 import re
 import numpy as np
 import pandas as pd
@@ -251,8 +251,8 @@ def load_model(df_train, target):
     # Chargement du modèle de prédiction
     df_train = df_train.rename(columns=lambda x: re.sub('[^A-Za-z0-9_]+', '', x))
 
-    with open('model1_pkl', 'rb') as d:
-        clf = pickle.load(d)
+    with open('model_sio', 'rb') as d:
+        clf = sio.loads(d, trusted=True)
     clf.fit(df_train, target['TARGET'])
 
     return clf
